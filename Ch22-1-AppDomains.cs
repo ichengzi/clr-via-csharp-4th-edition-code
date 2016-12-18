@@ -10,9 +10,9 @@ public sealed class Program
 {
     public static void Main()
     {
-        Marshalling();
+        //Marshalling();
         //FieldAccessTiming();
-        //AppDomainResourceMonitoring();
+        AppDomainResourceMonitoring();
         //UnloadTimeout.Go();
 
         Console.Read();
@@ -177,6 +177,8 @@ public sealed class Program
         Console.WriteLine("{0}", sw.Elapsed);
     }
 
+
+    // 监视一个AppDomain 在两个时间点之间的变化
     private sealed class AppDomainMonitorDelta : IDisposable
     {
         private AppDomain m_appDomain;
@@ -200,6 +202,7 @@ public sealed class Program
 
         public void Dispose()
         {
+            m_appDomain.FirstChanceException
             GC.Collect();
             Console.WriteLine("FriendlyName={0}, CPU={1}ms",
                m_appDomain.FriendlyName,
@@ -211,6 +214,7 @@ public sealed class Program
         }
     }
 
+    // AppDomain 使用资源监视
     private static void AppDomainResourceMonitoring()
     {
         using (new AppDomainMonitorDelta(null))
@@ -227,7 +231,8 @@ public sealed class Program
             // Spin the CPU for about 5 seconds
             Int64 stop = Environment.TickCount + 5000;
             while (Environment.TickCount < stop)
-                ;
+            {
+            }
         }
     }
 
