@@ -202,7 +202,6 @@ public sealed class Program
 
         public void Dispose()
         {
-            m_appDomain.FirstChanceException
             GC.Collect();
             Console.WriteLine("FriendlyName={0}, CPU={1}ms",
                m_appDomain.FriendlyName,
